@@ -84,7 +84,7 @@ function Home() {
              {t("hello**FarmConnect** connects farmers, consumers, and sellers within a dynamic agricultural community. Find fresh products, resources, and a support network")}
               </p>
 
-              <button onClick={handlePlayPause} class="farmconnect-play-button">
+              <button onClick={handlePlayPause} className="farmconnect-play-button">
                 {isPlaying ? 'Pause' : 'Play'}
               </button>
             </Col>
