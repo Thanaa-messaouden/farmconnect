@@ -80,8 +80,8 @@ function Home() {
               <h2 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>FarmConnect</h2>
 
               <p style={{ fontSize: '1.2rem', lineHeight: '1.5' }}>
-{t("hello")}
-             **FarmConnect** connecte les agriculteurs, les consommateurs et les vendeurs au sein d'une communauté agricole dynamique. Trouvez des produits frais, des ressources et un réseau de soutien.
+
+             {t("hello**FarmConnect** connects farmers, consumers, and sellers within a dynamic agricultural community. Find fresh products, resources, and a support network")}
               </p>
 
               <button onClick={handlePlayPause} class="farmconnect-play-button">
