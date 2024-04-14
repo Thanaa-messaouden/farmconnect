@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -10,7 +10,10 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
 import PasswordStrengthBar from 'react-password-strength-bar';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
+  
 function Login({ initialValues, onChange }) {
   const [user] = useAuthState(auth);
   const [showSignUpForm, setShowSignUpForm] = useState(false);
@@ -18,13 +21,13 @@ function Login({ initialValues, onChange }) {
 
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
-  useEffect(() => {
-    const handleOnlineStatusChange = () => {
-      setIsOnline(navigator.onLine);
-    };
+    useEffect(() => {
+      const handleOnlineStatusChange = () => {
+        setIsOnline(navigator.onLine);
+      };
 
-    window.addEventListener("online", handleOnlineStatusChange);
-    window.addEventListener("offline", handleOnlineStatusChange);
+      window.addEventListener("online", handleOnlineStatusChange);
+      window.addEventListener("offline", handleOnlineStatusChange);
 
     return () => {
       window.removeEventListener("online", handleOnlineStatusChange);
@@ -53,9 +56,9 @@ function Login({ initialValues, onChange }) {
     setPassword(e.target.value); // Mise à jour de la valeur du mot de passe lorsqu'il est modifié
   };
 
-  const handleRegisterClick = () => {
-    setShowSignUpForm(true);
-  };
+    const handleRegisterClick = () => {
+      setShowSignUpForm(true);
+    };
 
   const handleSignUp = async (email, password) => {
     try {
@@ -69,12 +72,12 @@ function Login({ initialValues, onChange }) {
     }
   };
 
-  const handleRegisterSubmit = async (e) => {
-    e.preventDefault();
-    const email = e.target[0].value;
-    const enteredPassword = e.target[1].value;
-    handleSignUp(email, enteredPassword);
-  };
+    const handleRegisterSubmit = async (e) => {
+      e.preventDefault();
+      const email = e.target[0].value;
+      const enteredPassword = e.target[1].value;
+      handleSignUp(email, enteredPassword);
+    };
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -89,7 +92,7 @@ function Login({ initialValues, onChange }) {
   };
 
   return (
-    <div className="formContainer">
+    <div className="formContainer" style={{ marginTop: '100px'}}>
       {!isOnline && <Offline />}
       {showSignUpForm ? (
         <SignUpForms />
@@ -123,5 +126,4 @@ function Login({ initialValues, onChange }) {
     </div>
   );
 };
-
 export default Login;

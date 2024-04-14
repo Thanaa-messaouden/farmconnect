@@ -28,48 +28,62 @@
   }
 }
 
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+
 .formContainer .formWrapper {
   background-color: transparent;
-  font-family: 'Roboto', sans-serif;
   padding: 0px 60px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 0px;
+  margin-top: -40px;
   align-items: center;
   font-weight: bold;
 }
 
 .formContainer .formWrapper .logo {
-  color: #537a5d;
+  color: white;
   font-weight: bold;
   font-size: 24px;
 }
 
 .formContainer .formWrapper .title {
-  color: #324838;
+  color: white;
   font-size: 15px;
 }
 
 .formContainer .formWrapper form {
   display: flex;
+  align-items: center;
   flex-direction: column;
-  height: 50vh;
   gap: 15px;
 }
 
 .formContainer .formWrapper form input {
-  padding: 5px;
   border: none;
-  width: 250px;
+  width: 300px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.631);
+  color: #324838;
   border-radius: 10px;
-  background-color: #99b2a0cf;
-  border-bottom: 1px solid #435e4a;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.formContainer .formWrapper form label img {
+  color: white;
+  background-color: #60b877;
+  cursor: pointer;
 }
 
 .formContainer .formWrapper form input::placeholder {
-  color: rgb(255, 255, 255);
+  color: #324838;
   font-weight: bold;
 }
 
@@ -80,14 +94,34 @@
 
 
 .formContainer .formWrapper form button {
-  background-color: #3d6f4a;
-  color: white;
+  background-color: #288f43;
+  color: rgba(0, 0, 0, 0.791);
+  width: 111px;
   border-radius: 10px;
   padding: 5px;
   font-weight: bold;
-  border: none;
+  font-size: 15px;
+  border-color: white;
   cursor: pointer;
+  transition: all;
+
 }
+
+.formContainer .formWrapper form div {
+  display: flex;
+  width: 100%;
+}
+
+.formContainer .formWrapper form span {
+  color: rgba(255, 255, 255, 0.806);
+}
+
+
+.formContainer .formWrapper form button:hover {
+  background-color: rgb(12, 73, 38);
+  border: none;
+}
+
 
 .formContainer .formWrapper form label {
   display: flex;
@@ -111,7 +145,7 @@
 }
 
 .home {
-  background-color: #77a883;
+  background-color: rgb(227, 227, 227);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -120,8 +154,8 @@
 }
 
 .home .container {
-  border: 1px solid white;
-  border-radius: 10px;
+  border: 0px solid white;
+  border-radius: 20px;
   width: 100%;
   height: 90%;
   display: flex;
@@ -304,6 +338,33 @@
   color: white;
   border-radius: 10px 0px 10px 10px;
 }
+
+.message.owner {
+  /* Add this to override the styles of the owner message */
+  flex-direction: row-reverse;
+}
+
+.messageContent {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messageContent.has-image {
+  flex-direction: row;
+  align-items: center;
+}
+
+.messageContent.has-image p {
+  margin-left: 10px;
+}
+
+
+
+
+
+
 .home .container .chat .input {
   height: 50px;
   background-color: white;

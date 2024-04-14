@@ -13,8 +13,16 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Offline from '../Pages/Offline';
 import PasswordStrengthBar from 'react-password-strength-bar';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 const Register = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -42,13 +50,13 @@ const Register = () => {
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    console.log("Connexion en cours...");
+    console.log(t("Connecting..."));
     signInWithPopup(auth, provider)
       .then(() => {
-        alert("Connecté");
+        alert(t("connected"));
       })
       .catch((error) => {
-        console.log(error);
+        console.log(t("error"));
       });
   };
 
@@ -56,7 +64,7 @@ const Register = () => {
     const { name, value, files } = e.target;
     setUserDetails((prevState) => ({
       ...prevState,
-      [name]: name === "proof" ? files[0] : value,
+      [name]: name === t ("proof") ? files[0] : value,
     }));
   };
 
@@ -122,46 +130,46 @@ const Register = () => {
       {showLoginForm ? (
         <LoginComponent />
       ) : (
-        <div className="formWrapper">
-          <span className="logo">Commencez maintenant</span>
+        <div className="formWrapper" style={{ marginTop: '-70px'}}>
+          <span className="logo">{t("start now")}</span>
           <form onSubmit={handleSubmit}>
             <input
               required
               type="text"
-              placeholder="Nom affiché"
+              placeholder={t("display name")}
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
             />
             <input
               required
               type="email"
-              placeholder="Email"
+              placeholder={t("email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
               required
               type="password"
-              placeholder="Mot de passe"
+              placeholder={t("password")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             <PasswordStrengthBar password={password} />
             <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProfession">
-              <Form.Label>Profession</Form.Label>
+              <Form.Label>{t("profession")}</Form.Label>
               <Form.Select name="profession" value={userDetails.profession} onChange={handleChange} className="custom-input">
-                <option value="">Sélectionnez une profession</option>
-                <option value="commerçant">Commerçant</option>
-                <option value="consommateur">Consommateur</option>
-                <option value="ingénieur_agriculteur">Ingénieur Agricole</option>
-                <option value="agriculteur">Agriculteur</option>
+                <option value="">{t("Select a profession")}</option>
+                <option value="commerçant">{t("merchant")}</option>
+                <option value="consommateur">{t("Consumer")}</option>
+                <option value="ingénieur_agriculteur">{t("ingénieur Agricole")}</option>
+                <option value="agriculteur">{t("farmer")}</option>
               </Form.Select>
             </Form.Group>
             {userDetails.profession === 'commerçant' ||
               userDetails.profession === 'ingénieur_agriculteur' ||
               userDetails.profession === 'agriculteur' ? (
               <Form.Group className="mb-3 hide-placeholder-on-focus" controlId="formBasicProof">
-                <Form.Label>Justificatif (carte d'agriculteur, diplome d'ingenieur, registre de commerce)</Form.Label>
+                <Form.Label>{t("Proof (farmer’s card, engineer’s diploma, trade register)")}</Form.Label>
                 <Form.Control
                   required
                   type="file"
@@ -181,21 +189,21 @@ const Register = () => {
             <Col>
             <label htmlFor="file">
               <img src={Add} alt="" />
-              <span>Ajouter un avatar</span>
+              <span>{t("add an avatar")}</span>
             </label>            </Col>
             <Col>
               <button className="sign-in" style={{ backgroundColor: 'transparent', border: 'none' }}>
-                <img src={GoogleSignin} alt="Se connecter avec Google" type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
+                <img src={GoogleSignin} alt={t("login with Google")} type="button" onClick={googleSignIn} style={{ width:'30px', marginRight: '100px'}}/>
               </button>
             </Col>
           </Row>
-            <button disabled={loading}>S'inscrire</button>
-            {loading && "Téléchargement et compression de l'image en cours, veuillez patienter..."}
-            {err && <span>Quelque chose s'est mal passé</span>}
+            <button disabled={loading}>{t("register")}</button>
+            {loading && t("Downloading and compressing the current image, please wait...")}
+            {err && <span>{t("Something went wrong")}</span>}
           </form>
           <p>
-            Vous avez déjà un compte ?{" "}
-            <button onClick={() => setShowLoginForm(true)} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px'}}>Se connecter</button>
+           {t("already have an account?")}{" "}
+            <button onClick={() => setShowLoginForm(true)} style={{border: 'none', backgroundColor: 'transparent', color: 'red', fontWeight: 'bold', fontSize: '15px'}}>{t("login")}</button>
           </p>
         </div>
       )}

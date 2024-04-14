@@ -6,8 +6,18 @@ import Login from '../Pages/Login';
 import farmers from '../Images/farmrs-removebg-preview.png';
 import '../Styles/Home.css';
 import Video from '../img/2758322-hd_1920_1080_30fps.mp4'
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
 
 function Home() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  };
+
+
   const [isPlaying, setIsPlaying] = useState(false); // State to control video playback
 
   useEffect(() => {
@@ -56,22 +66,31 @@ function Home() {
             left: 0,
             width: '100%',
             height: '100vh',
-            objectFit: 'cover', // Ajuster le dimensionnement de la vidéo selon les besoins
-            zIndex: -1, // Assurer que la vidéo reste derrière les autres contenus
-            background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/1560989-hd_1280_720_30fps.mp4")', // Ajouter le dégradé linéaire sombre
-            backgroundBlendMode: 'multiply', // Mélanger le dégradé avec la vidéo pour l'assombrir
+            objectFit: 'cover', 
+            zIndex: -1, 
+            filter: 'brightness(0.6)',
+
            }}
         />
         <Row style={{ position: 'relative', zIndex: 1 }}>
-        <Col md={4} className='forms-container' style={{ borderRadius: '20px', marginTop: '10px', Width: '100px' }}>
+        <Col md={4} className='forms-container' >
             <Login />
           </Col>
-          <Col md={5} className="forms-farmers" style={{marginTop: '30px', fontFamily: 'sans-serif',  fontWeight: 'bold', color: '#324834'}}>
-            <h3>Atteignez vos clients plus rapidement, <br /> Avec nous.</h3>
-            <button onClick={handlePlayPause} style ={{ border: 'none',  borderRadius : '5px', backgroundColor: 'transparent', fontWeight : 'bold', color: 'white'}}> 
-              {isPlaying ? 'Pause' : 'Play'}
-            </button>
-          </Col>
+          <Col className="farmconnect-hero">
+              <h2 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>FarmConnect</h2>
+
+              <p style={{ fontSize: '1.2rem', lineHeight: '1.5' }}>
+
+             {t("hello**FarmConnect** connects farmers, consumers, and sellers within a dynamic agricultural community. Find fresh products, resources, and a support network")}
+              </p>
+
+              <button onClick={handlePlayPause} className="farmconnect-play-button">
+                {isPlaying ? 'Pause' : 'Play'}
+              </button>
+            </Col>
+
+
+
         </Row>
       </div>
     </div>
